@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="NeutralusN900">#232926</color>
+    <color name="NeutralusN500">#516370</color>
+    <color name="NeutralusN300">#AFB3B7</color>
+    <color name="NeutralusN100">#F9F9F9</color>
+    <color name="AccentN0">#FFFFFF</color>
+    <color name="AccentA500">#0A6375</color>
+    <color name="AccentA600">#085D6F</color>
+    <color name="AccentA100">#8CB6B2</color>
+    <color name="OtherG500">#CFE3C4</color>
+    <color name="OtherG100">#F5F9F3</color>
+    <color name="OtherP500">#FAD2E2</color>
+    <color name="OtherP100">#FFFAFC</color>
+    <color name="OtherL500">#B2D99E</color>
+    <color name="OtherL100">#F9FBF8</color>
+    <color name="OtherB500blueish">#A7D1E2</color>
+    <color name="OtherB100whiteish">#F5FAFC</color>
+    <color name="OtherB500greenish">#DBE1B8</color>
+    <color name="OtherB100ligthyellowish">#FDFFF1</color>
+</resources>
