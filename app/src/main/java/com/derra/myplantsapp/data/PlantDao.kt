@@ -1,31 +1,39 @@
 package com.derra.myplantsapp.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Query
-import androidx.room.Upsert
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
 
 
 @Dao
 interface PlantDao {
-    @Upsert
-    suspend fun upsertPlant(plant: Plant)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertPlant(plant: Plant)
+
+    @Update
+    suspend fun updatePlant(plant: Plant)
 
     @Delete
     suspend fun deletePlant(plant: Plant)
 
-    @Query("SELECT * FROM plant where id = :id")
+    @Query("DELETE FROM plant WHERE name = :plantName AND day = :day")
+    suspend fun deletePlantsByDate(plantName: String, day: String)
+
+    @Query("SELECT * FROM plant WHERE name = :name")
+    suspend fun getPlantsByName(name: String): List<Plant>
+
+    @Query("SELECT * FROM plant WHERE id = :id")
     suspend fun getPlantById(id: Int): Plant?
 
-    @Query("SELECT * FROM plant WHERE watered = 0 AND date < :currData ORDER BY date ASC")
+    @Query("SELECT * FROM plant where name = :name AND day = :day")
+    suspend fun getPlantByDate(name: String,day: String): List<Plant>
+    @Query("SELECT * FROM plant WHERE watered = 0 AND date < :currDate ORDER BY date ASC")
     fun getForgottenPlants(currDate: LocalDateTime): Flow<List<Plant>>
 
     @Query("SELECT * FROM plant WHERE watered = 1 OR date < :currDate ORDER BY date DESC")
     fun getHistoryPlants(currDate: LocalDateTime): Flow<List<Plant>>
 
-    @Query("SELECT * FROM plant where watered = 0 AND data > :currDate ORDER BY date ASC")
+    @Query("SELECT * FROM plant where watered = 0 AND date > :currDate ORDER BY date ASC")
     fun getFuturePlants(currDate: LocalDateTime): Flow<List<Plant>>
 
 }

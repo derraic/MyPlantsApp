@@ -1,0 +1,124 @@
+#DATES                          DropdownMenu(
+                                modifier = Modifier.height(48.dp),
+                                expanded = expanded.value,
+                                onDismissRequest = { expanded.value = false },
+
+                                ) {
+                                Text("Dates")
+                                items.forEach { item ->
+                                    val isSelected = viewModel.dates.contains(item)
+
+
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .padding(vertical = 8.dp, horizontal = 16.dp)
+                                            .fillMaxWidth()
+                                            .clickable {
+                                                viewModel.onEvent(
+                                                    AddEditPlantEvent.OnDayChange(
+                                                        isSelected,
+                                                        item
+                                                    )
+                                                )
+                                            }
+                                    ) {
+                                        Checkbox(
+                                            checked = isSelected,
+                                            onCheckedChange = {},
+                                            modifier = Modifier.padding(end = 8.dp)
+                                        )
+                                        Text(
+                                            text = item,
+                                            style = MaterialTheme.typography.body1,
+                                        )
+                                    }
+                                }
+                            }
+
+#plantsize
+                            DropdownMenu(
+                                expanded = expanded1.value,
+                                onDismissRequest = { expanded1.value = false },
+                            ) {
+                                sizes.forEach { item ->
+                                    val isSelected = item == viewModel.plantSize
+
+
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .padding(vertical = 8.dp, horizontal = 16.dp)
+                                            .fillMaxWidth()
+                                            .clickable(onClick = {
+                                                viewModel.onEvent(
+                                                    AddEditPlantEvent.OnSizeChange(
+                                                        item
+                                                    )
+                                                )
+                                            })
+                                    ) {
+                                        RadioButton(
+                                            selected = isSelected,
+                                            onClick = {},
+                                            modifier = Modifier.padding(end = 8.dp)
+                                        )
+                                        Text(
+                                            text = item,
+                                            style = MaterialTheme.typography.body1,
+                                        )
+                                    }
+                                }
+                            }
+
+#time
+
+                                DropdownMenu(
+                                    expanded = expanded3,
+                                    onDismissRequest = { expanded3 = false },
+                                    modifier = Modifier.width(IntrinsicSize.Min)
+                                ) {
+                                    Column(
+                                        modifier = Modifier.verticalScroll(rememberScrollState())
+                                    ) {
+                                        for (hour in 0..23) {
+                                            Text(
+                                                text = hour.toString().padStart(2, '0'),
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .clickable {
+                                                        selectedHour = hour
+                                                        expanded3 = false
+                                                    }
+                                                    .padding(16.dp)
+                                            )
+                                        }
+                                    }
+
+                                    Column(
+                                        modifier = Modifier.verticalScroll(rememberScrollState())
+                                    ) {
+                                        for (minute in 0..59) {
+                                            Text(
+                                                text = minute.toString().padStart(2, '0'),
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .clickable {
+                                                        selectedMinute = minute
+                                                        viewModel.onEvent(
+                                                            AddEditPlantEvent.OnTimeChange(
+                                                                "${selectedHour.toString()}:${
+                                                                    selectedMinute
+                                                                        .toString()
+                                                                        .padStart(2, '0')
+                                                                }"
+                                                            )
+                                                        )
+                                                        expanded3 = false
+                                                    }
+                                                    .padding(16.dp)
+                                            )
+                                        }
+                                    }
+
+                                }

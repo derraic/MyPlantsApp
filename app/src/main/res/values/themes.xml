@@ -2,6 +2,5 @@
 <resources>
 
     <style name="Theme.MyPlantsApp" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/OtherB100whiteish</item>
     </style>
 </resources>
