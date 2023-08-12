@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "394506882186",
+    "project_id": "plantnotificationcenter",
+    "storage_bucket": "plantnotificationcenter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394506882186:android:e5ff41c37ab96c351c7173",
+        "android_client_info": {
+          "package_name": "com.derra.myplantsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394506882186-e4qi9arf8bi6idolfufblav9f6ip36ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqVO6kLjiTwNcykGxi9hhYHx22mnrtMgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394506882186-e4qi9arf8bi6idolfufblav9f6ip36ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color -->
+    <item android:drawable="@color/AccentN0" />
+
+    <!-- Drawable on top of the background color -->
+    <item android:drawable="@drawable/background_filled_page" />
+</layer-list>

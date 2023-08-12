@@ -10,13 +10,14 @@ data class Plant(
     @PrimaryKey val id: Int? = null,
     var name: String,
     var description: String? = null,
-    var waterAmount: Int,
+    var waterAmount: String,
     var size: String,
     var watered: Boolean = false,
     val date: LocalDateTime,
     var image: String?,
     var day: String,
     @ColumnInfo(name = "weekdays")
-    var days: List<String>
+    var days: List<String>,
+    var nextWeekGenerated: Boolean = false
 
 )

@@ -11,14 +11,7 @@ class PlantRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updatePlant(plant: Plant) {
-        val plantsToDelete = dao.getPlantsByName(plant.name)
-        for (plant1 in plantsToDelete) {
-            plant1.name = plant.name
-            plant1.description = plant.description
-            plant1.waterAmount = plant.waterAmount
-            plant1.watered = plant.watered
-            dao.updatePlant(plant = plant1)
-        }
+        dao.updatePlant(plant = plant)
     }
 
     override suspend fun deletePlant(plant: Plant) {
@@ -54,6 +47,14 @@ class PlantRepositoryImpl @Inject constructor(
 
     override fun getFuturePlants(currDate: LocalDateTime): Flow<List<Plant>> {
         return dao.getFuturePlants(currDate)
+    }
+
+    override fun getHistoryPlantsAsList(currDate: LocalDateTime): List<Plant> {
+         return dao.getHistoryPlantsAsList(currDate)
+    }
+
+    override fun getFuturePlantsAsList(currDate: LocalDateTime): List<Plant> {
+        return dao.getFuturePlantsAsList(currDate)
     }
 
 

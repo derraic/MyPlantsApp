@@ -1,6 +1,9 @@
 package com.derra.myplantsapp.plants_list
 
+import android.Manifest
 import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -21,7 +24,8 @@ fun PlantListScreen(
     val plants = viewModel.plants.collectAsState(initial = emptyList())
 
 
-    LaunchedEffect(key1 = true) {
+
+    LaunchedEffect(key1 = plants) {
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.ShowSnackBar -> {
@@ -41,13 +45,28 @@ fun PlantListScreen(
 
     }
 
+    val permissionLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(), onResult = {isGranted ->
+        viewModel.permissionNotification = isGranted
 
-    if (plants.value.isEmpty()) {
-        PlantListEmptyScreen(Modifier,viewModel)
+    })
+
+    LaunchedEffect(key1 = true) {
+        viewModel.onStart()
+        if (!viewModel.permissionNotification) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
+    if (viewModel.selected == "All Notifications") {
+        PlantListNotificationScreen(viewModel = viewModel)
+    }
+    else if (plants.value.isEmpty()) {
+        PlantListEmptyScreen(Modifier,viewModel, scaffoldState)
 
     } else {
-        PlantListFullScreen(plants = plants.value, viewModel = viewModel)
-
+        PlantListFullScreen(plants = plants.value, viewModel = viewModel, scaffoldState = scaffoldState)
     }
 
 }

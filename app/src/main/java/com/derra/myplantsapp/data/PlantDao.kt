@@ -35,5 +35,9 @@ interface PlantDao {
 
     @Query("SELECT * FROM plant where watered = 0 AND date > :currDate ORDER BY date ASC")
     fun getFuturePlants(currDate: LocalDateTime): Flow<List<Plant>>
+    @Query("SELECT * FROM plant WHERE watered = 1 OR date < :currDate ORDER BY date DESC")
+    fun getHistoryPlantsAsList(currDate: LocalDateTime): List<Plant>
+    @Query("SELECT * FROM plant where watered = 0 AND date > :currDate ORDER BY date ASC")
+    fun getFuturePlantsAsList(currDate: LocalDateTime): List<Plant>
 
 }

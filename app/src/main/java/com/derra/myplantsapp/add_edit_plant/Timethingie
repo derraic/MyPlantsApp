@@ -1,0 +1,76 @@
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(48.dp)
+                                    .clickable { viewModel.onEvent(AddEditPlantEvent.OnModalTimeClick) }
+                                    //.background(Color.LightGray)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .border(
+                                        width = 1.dp,
+                                        color = Color.White,
+                                        shape = RoundedCornerShape(8.dp)
+                                    )
+                            ) {
+                                TextField(
+                                    value = viewModel.time,
+                                    onValueChange = {},colors = textFieldColors,
+                                    textStyle = TextStyle(fontSize = 14.sp,
+                                        fontFamily = FontFamily(Font(R.font.poppins_regular)),
+                                        fontWeight = FontWeight(500),
+                                        color = Color(0xFF516370)),
+                                    modifier = Modifier
+                                        .height(48.dp)
+                                        .clickable { viewModel.onEvent(AddEditPlantEvent.OnModalTimeClick) }
+
+                                    ,
+                                    readOnly = true
+                                )
+                                Box(
+                                    modifier
+                                        .clickable { viewModel.onEvent(AddEditPlantEvent.OnModalTimeClick) }
+                                        .align(Alignment.CenterEnd)
+                                        .padding(end = 20.dp)) {
+                                    Icon(painter = painterResource(id = R.drawable.drop_down_menu_button), contentDescription = "click to adjust values")
+                                }
+
+                            }
+
+
+
+
+                                                        Box(
+                                                            modifier = Modifier
+                                                                .height(48.dp)
+                                                                .weight(1f)
+                                                                .clip(RoundedCornerShape(8.dp))
+                                                                .border(
+                                                                    width = 1.dp,
+                                                                    color = Color.White,
+                                                                    shape = RoundedCornerShape(8.dp)
+                                                                )
+                                                                .clickable { viewModel.onEvent(AddEditPlantEvent.OnModalPlantSizeClick) },
+
+                                                            ) {
+
+                                                            TextField(
+                                                                modifier = Modifier
+                                                                    .clickable { viewModel.onEvent(AddEditPlantEvent.OnModalPlantSizeClick) }
+                                                                    .height(48.dp),colors = textFieldColors,
+                                                                value = viewModel.plantSize,
+                                                                textStyle = TextStyle(fontSize = 14.sp,
+                                                                    fontFamily = FontFamily(Font(R.font.poppins_regular)),
+                                                                    fontWeight = FontWeight(500),
+                                                                    color = Color(0xFF516370)),
+                                                                onValueChange = { },
+                                                                readOnly = true,
+                                                            )
+
+                                                            Box(
+                                                                modifier
+                                                                    .clickable { viewModel.onEvent(AddEditPlantEvent.OnModalPlantSizeClick) }
+                                                                    .align(Alignment.CenterEnd)
+                                                                    .padding(end = 20.dp)) {
+                                                                Icon(painter = painterResource(id = R.drawable.drop_down_menu_button), contentDescription = "click to adjust values")
+                                                            }
+
+                                                        }

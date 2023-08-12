@@ -6,9 +6,18 @@ import androidx.room.TypeConverters
 
 @Database(
     entities = [Plant::class],
-    version = 1
+    version = 8
 )
 @TypeConverters(Converters::class)
 abstract class PlantDatabase : RoomDatabase() {
+
     abstract val dao: PlantDao
+
+
+}
+
+@Database(entities = [Notification::class], version = 1)
+@TypeConverters(Converters::class)
+abstract class NotificationDatabase : RoomDatabase() {
+    abstract val notificationDao: NotificationDao
 }

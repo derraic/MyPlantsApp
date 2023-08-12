@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.TypeConverter
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 
@@ -20,6 +21,20 @@ class Converters {
     @TypeConverter
     fun toTimestamp(date: LocalDateTime?): Long? {
         return date?.atZone(ZoneId.systemDefault())?.toInstant()?.toEpochMilli()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @TypeConverter
+    fun fromTimestampLocalDate(value: Long?): LocalDate? {
+        return value?.let {
+            Instant.ofEpochMilli(value).atZone(ZoneId.systemDefault()).toLocalDate()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @TypeConverter
+    fun toTimestampLocalDate(date: LocalDate?): Long? {
+        return date?.atStartOfDay(ZoneId.systemDefault())?.toInstant()?.toEpochMilli()
     }
 
     @TypeConverter

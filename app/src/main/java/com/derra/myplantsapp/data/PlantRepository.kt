@@ -20,12 +20,17 @@ interface PlantRepository {
 
     suspend fun getPlantByDate(name: String,day: String): List<Plant>
 
-    @Query("SELECT * FROM plant WHERE watered = 0 AND date < :currData ORDER BY date ASC")
+
     fun getForgottenPlants(currDate: LocalDateTime): Flow<List<Plant>>
 
-    @Query("SELECT * FROM plant WHERE watered = 1 OR date < :currDate ORDER BY date DESC")
+
     fun getHistoryPlants(currDate: LocalDateTime): Flow<List<Plant>>
 
-    @Query("SELECT * FROM plant where watered = 0 AND data > :currDate ORDER BY date ASC")
+
     fun getFuturePlants(currDate: LocalDateTime): Flow<List<Plant>>
+
+    fun getHistoryPlantsAsList(currDate: LocalDateTime): List<Plant>
+    fun getFuturePlantsAsList(currDate: LocalDateTime): List<Plant>
+
+
 }
